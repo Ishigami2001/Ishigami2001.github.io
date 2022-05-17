@@ -5,13 +5,21 @@
     <title></title>
   </head>
   <body>
-    <script type="text/javascript">
-      var prompt_a = prompt("1つ目の数を入れてください");
-      var prompt_b = prompt("2つ目の数を入れてください");
+    <input id="int1" type="text" name="" value="">
+    <input id="int2" type="text" name="" value="">
+    <button onclick="prompt_keisan()" type="button" name="button">計算する</button>
 
-      var result = parseInt(prompt_a) + pareseInt(prompt_b);
+    <script type="text/javascript">
+
+    function prompt_keisan() {
+
+      var ele1 = document.getElementsById('int1');
+      var ele2 = document.getElementsById('int2');
+
+      var result = parseInt(ele1.value) + parseInt(ele2.value);
 
       alert(result);
+    }
     </script>
   </body>
 </html>
