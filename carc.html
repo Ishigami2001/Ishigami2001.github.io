@@ -8,16 +8,17 @@
     <input id="int1" type="text" name="" value="">
     <input id="int2" type="text" name="" value="">
     <button onclick="prompt_keisan()" type="button" name="button">計算する</button>
+    <p id="result"></p>
 
     <script type="text/javascript">
 
     function prompt_keisan() {
 
-      var ele1 = document.getElementsById('int1');
-      var ele2 = document.getElementsById('int2');
+      var ele1 = document.getElementById('int1');
+      var ele2 = document.getElementById('int2');
 
       var result = parseInt(ele1.value) + parseInt(ele2.value);
-
+      var result_text = document.getElementById('result')
       alert(result);
     }
     </script>
