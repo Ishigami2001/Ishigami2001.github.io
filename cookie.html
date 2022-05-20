@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+        count =0;
+        function stone_click() {
+          span = document.getElementById('stone_count');
+          count += 1;
+          span.textContent = count;
+        }
+        function sagyouinn() {
+          setInterval(autoCountUp,1000);
+        }
+        function autoCountUp() {
+          count += 1
+          span = document.getElementById('stone_count');
+          span.textContent = count;
+        }
+    </script>
+
+    <p><span id = "stone_count"></span>枚</p>
+    <img onclick="stone_click()" src="stone.png" alt="">
+    <ul>
+      <li onclick="sagyouinn()" >作業員</li>
+      <li>ドリル</li>
+      <li>重機</li>
+    </ul>
+  </body>
+</html>
