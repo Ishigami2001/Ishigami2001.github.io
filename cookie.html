@@ -7,18 +7,52 @@
   <body>
     <script type="text/javascript">
         count =0;
-        function stone_click() {
+        sagyouinn_count = 0;
+        dril_count = 0;
+        machine_count = 0;
+
+        /*画面更新処理*/
+        setInterval(screen_update,10);
+        function screen_update(){
           span = document.getElementById('stone_count');
-          count += 1;
           span.textContent = count;
+        }
+
+        function stone_click() {
+          count += 1;
         }
         function sagyouinn() {
-          setInterval(autoCountUp,1000);
+          if (count >= 10) {
+            count -= 10;
+
+            /*作業員の引替え回数*/
+            sagyouinn_count++;
+
+            setInterval(autoCountUp,1000,1);
+          }
         }
-        function autoCountUp() {
-          count += 1
-          span = document.getElementById('stone_count');
-          span.textContent = count;
+        function dril() {
+          if (count >= 100) {
+            count -= 100;
+
+            /*ドリルの引替え回数*/
+            dril_count++;
+
+            setInterval(autoCountUp,1000,8);
+          }
+        }
+        function machine() {
+          if (count >= 1000) {
+            count -= 1000;
+
+            /*重機の引替え回数*/
+            machine_count++;
+            
+            setInterval(autoCountUp,1000,15);
+          }
+        }
+        function autoCountUp(num) {
+          count += num;
         }
     </script>
 
@@ -26,8 +60,8 @@
     <img onclick="stone_click()" src="stone.png" alt="">
     <ul>
       <li onclick="sagyouinn()" >作業員</li>
-      <li>ドリル</li>
-      <li>重機</li>
+      <li onclick="dril()" >ドリル</li>
+      <li onclick="machine()" >重機</li>
     </ul>
   </body>
 </html>
