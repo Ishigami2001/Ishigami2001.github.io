@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      img{width:300px;}
+      body{ margin: 0;
+            height: 100vh}
+      img{ width: 50px;}
+      .container{
+                  display: flex;
+                  height: 100vh;}
+      .item1{ flex-grow:2;
+              background-image: url("bgBlue.jpg");}
+      .item2{ flex-grow:4;
+              background-color: green;}
+      .item3{ flex-grow:3;
+              background-color: brown}
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*クッキーのカウンタ */
+      let s_count = localStorage.getItem("ls_count");
+      if(s_count){
+        cookie_count = parseInt(s_count);
+      }else{
+        cookie_count = 0;
+      }
+
+      setInterval(save_action,1000);
+      function save_action() {
+        localStorage.setItem("ls_count",cookie_count);
+      }
+
+
+      function cookieClick(num) {
+        var count_text = document.getElementById('cookie_count')
+        cookie_count= cookie_count + num;
+        count_text.textContent = cookie_count;
+      }
+
+      function cursor() {
+        if(cookie_count >=10){
+          cookie_count -= 10;
+          setInterval(cookieClick,1000,1);
+        }
+      }
+      function grandma() {
+        if(cookie_count >=100){
+          cookie_count -= 100;
+          setInterval(cookieClick,1000,1);
+        }
+      }
+      function farm() {
+        if(cookie_count >=200){
+          cookie_count -= 200;
+          setInterval(cookieClick,1000,8);
+        }
+      }
+      function mine() {
+        if(cookie_count >=300){
+          cookie_count -= 300;
+          setInterval(cookieClick,1000,100);
+        }
+      }
+
+    </script>
+    <div class="container">
+      <div class="item1">
+        <p>
+          <span id="cookie_count"></span> cookies
+        </p>
+        <img onclick="cookieClick(1)" src="cookie.png" alt="">
+      </div>
+
+      <div class="item2">
+        製作途中
+      </div>
+
+      <div class="item3">
+        <ul>
+          <li onclick="cursor()">カーソル</li>
+          <li onclick="grandma()">グランマ</li>
+          <li onclick="farm()">ファーム</li>
+          <li onclick="mine()">マイン</li>
+          <li>ファクトリー</li>
+        </ul>
+      </div>
+    </div>
+
+
+  </body>
+</html>
