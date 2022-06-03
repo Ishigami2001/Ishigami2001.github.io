@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <meta charset="utf-8">
     <title></title>
     <style media="screen">
@@ -14,7 +18,7 @@
       .item1{ flex-grow:2;
               background-image: url("bgBlue.jpg");}
       .item2{ flex-grow:4;
-              background-color: green;}
+              background-color: darkgreen;}
       .item3{ flex-grow:3;
               background-color: brown}
     </style>
@@ -25,6 +29,7 @@
       let s_count = localStorage.getItem("ls_count");
       if(s_count){
         cookie_count = parseInt(s_count);
+        cookie_count = 0;
       }else{
         cookie_count = 0;
       }
@@ -36,43 +41,53 @@
 
 
       function cookieClick(num) {
+        var cookie_img = document.getElementById('cookie_img');
+        cookie_img.classList.remove('animate__animated','animate__bounce');
+        void cookie_img.offsetWidth;
+        cookie_img.classList.add('animate__animated','animate__bounce');
+
         var count_text = document.getElementById('cookie_count')
         cookie_count= cookie_count + num;
         count_text.textContent = cookie_count;
       }
 
+      function autoCountUp(num){
+          cookie_count= cookie_count + num;
+      }
+
       function cursor() {
         if(cookie_count >=10){
           cookie_count -= 10;
-          setInterval(cookieClick,1000,1);
+          setInterval(autoCountUp,1000,1);
         }
       }
       function grandma() {
+        console.log("granma")
         if(cookie_count >=100){
           cookie_count -= 100;
-          setInterval(cookieClick,1000,1);
+          setInterval(autoCountUp,1000,1);
         }
       }
       function farm() {
         if(cookie_count >=200){
           cookie_count -= 200;
-          setInterval(cookieClick,1000,8);
+          setInterval(autoCountUp,1000,8);
         }
       }
       function mine() {
         if(cookie_count >=300){
           cookie_count -= 300;
-          setInterval(cookieClick,1000,100);
+          setInterval(autoCountUp,1000,100);
         }
       }
 
     </script>
     <div class="container">
       <div class="item1">
-        <p>
+        <p class="animate__animated animate__bounce">
           <span id="cookie_count"></span> cookies
         </p>
-        <img onclick="cookieClick(1)" src="cookie.png" alt="">
+        <img id = "cookie_img" onclick="cookieClick(1)" src="cookie.png" alt="">
       </div>
 
       <div class="item2">
