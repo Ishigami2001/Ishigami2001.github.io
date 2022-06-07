@@ -29,7 +29,6 @@
       let s_count = localStorage.getItem("ls_count");
       if(s_count){
         cookie_count = parseInt(s_count);
-        cookie_count = 0;
       }else{
         cookie_count = 0;
       }
@@ -38,7 +37,12 @@
       function save_action() {
         localStorage.setItem("ls_count",cookie_count);
       }
-
+      /*画面更新処理*/
+      setInterval(screen_update,10);
+      function screen_update(){
+        span = document.getElementById('cookie_count');
+        span.textContent = cookie_count ;
+      }
 
       function cookieClick(num) {
         var cookie_img = document.getElementById('cookie_img');
@@ -46,9 +50,7 @@
         void cookie_img.offsetWidth;
         cookie_img.classList.add('animate__animated','animate__bounce');
 
-        var count_text = document.getElementById('cookie_count')
         cookie_count= cookie_count + num;
-        count_text.textContent = cookie_count;
       }
 
       function autoCountUp(num){
@@ -62,7 +64,6 @@
         }
       }
       function grandma() {
-        console.log("granma")
         if(cookie_count >=100){
           cookie_count -= 100;
           setInterval(autoCountUp,1000,1);
