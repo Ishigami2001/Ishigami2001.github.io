@@ -21,10 +21,15 @@
               background-color: darkgreen;}
       .item3{ flex-grow:3;
               background-color: brown}
+    #menu_sell{
+      display: none;
+    }
     </style>
   </head>
   <body>
     <script type="text/javascript">
+      /*インターバルIDを控える*/
+      let event_ids = [];
       /*クッキーのカウンタ */
       let s_count = localStorage.getItem("ls_count");
       if(s_count){
@@ -60,25 +65,49 @@
       function cursor() {
         if(cookie_count >=10){
           cookie_count -= 10;
-          setInterval(autoCountUp,1000,1);
+          let r_id = setInterval(autoCountUp,1000,1);
+          event_ids.push(r_id);
         }
       }
+
+      function sell_cursor() {
+        let r_id = event_ids.pop();
+        clearInterval(r_id);
+      }
+
       function grandma() {
         if(cookie_count >=100){
           cookie_count -= 100;
           setInterval(autoCountUp,1000,1);
         }
       }
+
       function farm() {
         if(cookie_count >=200){
           cookie_count -= 200;
           setInterval(autoCountUp,1000,8);
         }
       }
+
       function mine() {
         if(cookie_count >=300){
           cookie_count -= 300;
           setInterval(autoCountUp,1000,100);
+        }
+      }
+      function factry() {
+
+      }
+
+      function buildSwitch() {
+        let buy_element = document.getElementById('menu_buy');
+        let sell_element = document.getElementById('menu_sell');
+        if (buy_element.style.display != "none" ) {
+          buy_element.style.display = "none";
+          sell_element.style.display = "block";
+        }else{
+          buy_element.style.display = "block";
+          sell_element.style.display = "none";
         }
       }
 
@@ -96,22 +125,27 @@
       </div>
 
       <div class="item3">
-        購入
-        <ul>
-          <li onclick="cursor()">カーソル</li>
-          <li onclick="grandma()">グランマ</li>
-          <li onclick="farm()">ファーム</li>
-          <li onclick="mine()">マイン</li>
-          <li>ファクトリー</li>
-        </ul>
-        売却
-        <ul>
-          <li onclick="cursor()">カーソル</li>
-          <li onclick="grandma()">グランマ</li>
-          <li onclick="farm()">ファーム</li>
-          <li onclick="mine()">マイン</li>
-          <li>ファクトリー</li>
-        </ul>
+        <div id="menu_buy">
+        <span onclick="buildSwitch()"> 購入</span>
+         <ul>
+           <li onclick="cursor()">カーソル</li>
+           <li onclick="grandma()">グランマ</li>
+           <li onclick="farm()">ファーム</li>
+           <li onclick="mine()">マイン</li>
+           <li onclick="factry()">ファクトリー</li>
+         </ul>
+        </div>
+
+        <div id="menu_sell">
+         <span onclick="buildSwitch()"> 売却</span>
+         <ul>
+           <li onclick="sell_cursor()">カーソル</li>
+           <li onclick="sell_grandma()">グランマ</li>
+           <li onclick="sell_farm()">ファーム</li>
+           <li onclick="sell_mine()">マイン</li>
+           <li onclick="sell_factry()">ファクトリー</li>
+         </ul>
+        </div>
       </div>
     </div>
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('GET', "https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&daily=weathercode&timezone=Asia%2FTokyo");
+      xhr.send();
+
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+
+          let weathercode = JSON.parse(xhr.responseText)["daily"]["weathercode"][1]
+          document.write(weathercode)
+        }
+      }
+    </script>
+  </body>
+</html>
