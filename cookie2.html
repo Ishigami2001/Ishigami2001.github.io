@@ -100,6 +100,7 @@
       }
 
       function buildSwitch() {
+<<<<<<< HEAD
         let buy_element = document.getElementById('menu_buy');
         let sell_element = document.getElementById('menu_sell');
         if (buy_element.style.display != "none" ) {
@@ -109,6 +110,10 @@
           buy_element.style.display = "block";
           sell_element.style.display = "none";
         }
+=======
+        let target_element = document.getElementById('menu_buy');
+        target_element.style.display = "none";
+>>>>>>> d00c57739cc0ea82c1f460e909b26d276806691b
       }
 
     </script>
@@ -137,7 +142,11 @@
         </div>
 
         <div id="menu_sell">
+<<<<<<< HEAD
          <span onclick="buildSwitch()"> 売却</span>
+=======
+         売却
+>>>>>>> d00c57739cc0ea82c1f460e909b26d276806691b
          <ul>
            <li onclick="sell_cursor()">カーソル</li>
            <li onclick="sell_grandma()">グランマ</li>
