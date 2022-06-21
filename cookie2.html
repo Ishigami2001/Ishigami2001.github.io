@@ -30,6 +30,8 @@
     <script type="text/javascript">
       /*インターバルIDを控える*/
       let event_ids = [];
+
+
       /*クッキーのカウンタ */
       let s_count = localStorage.getItem("ls_count");
       if(s_count){
@@ -37,6 +39,44 @@
       }else{
         cookie_count = 0;
       }
+
+      class Building {
+        //初期値の定義
+        constructor(time,num,cost) {
+          this.interval_ids =[];
+          this.interval_time = time;
+          this.add_num = num;
+          this.cost = cost
+        }
+        get count(){
+          return this.interval_ids.length;
+        }
+        //カウントアップ用
+        count_up(num){
+          cookie_count +=num;
+        }
+        //購入のメソッド
+        buy(){
+          if(cookie_count>=this.cost){
+            cookie_count -=this.cost;
+            let self = this;
+            let return_id = setInterval(function() {
+              self.count_up(self.add_num);
+            },self.interval_time);
+            this.interval_ids.push(return_id);
+
+          }
+        }
+        //売却のメソッド
+        sell(){
+          let return_id= this.interval_ids.pop();
+          clearInterval(return_id);
+        }
+      };
+
+      let cursor = new Building(1000,1,10);
+      let grandma = new Building(1000,4,100);
+
 
       setInterval(save_action,1000);
       function save_action() {
@@ -59,9 +99,10 @@
       }
 
       function autoCountUp(num){
-          cookie_count= cookie_count + num;
+        cookie_count= cookie_count + num;
       }
 
+      /*
       function cursor() {
         if(cookie_count >=10){
           cookie_count -= 10;
@@ -74,14 +115,15 @@
         let r_id = event_ids.pop();
         clearInterval(r_id);
       }
-
+      /*
       function grandma() {
         if(cookie_count >=100){
           cookie_count -= 100;
           setInterval(autoCountUp,1000,1);
         }
       }
-
+      */
+      /*
       function farm() {
         if(cookie_count >=200){
           cookie_count -= 200;
@@ -98,9 +140,9 @@
       function factry() {
 
       }
+      */
 
       function buildSwitch() {
-<<<<<<< HEAD
         let buy_element = document.getElementById('menu_buy');
         let sell_element = document.getElementById('menu_sell');
         if (buy_element.style.display != "none" ) {
@@ -110,10 +152,6 @@
           buy_element.style.display = "block";
           sell_element.style.display = "none";
         }
-=======
-        let target_element = document.getElementById('menu_buy');
-        target_element.style.display = "none";
->>>>>>> d00c57739cc0ea82c1f460e909b26d276806691b
       }
 
     </script>
@@ -133,8 +171,8 @@
         <div id="menu_buy">
         <span onclick="buildSwitch()"> 購入</span>
          <ul>
-           <li onclick="cursor()">カーソル</li>
-           <li onclick="grandma()">グランマ</li>
+           <li onclick="cursor.buy()">カーソル</li>
+           <li onclick="grandma.buy()">グランマ</li>
            <li onclick="farm()">ファーム</li>
            <li onclick="mine()">マイン</li>
            <li onclick="factry()">ファクトリー</li>
@@ -142,14 +180,10 @@
         </div>
 
         <div id="menu_sell">
-<<<<<<< HEAD
          <span onclick="buildSwitch()"> 売却</span>
-=======
-         売却
->>>>>>> d00c57739cc0ea82c1f460e909b26d276806691b
          <ul>
-           <li onclick="sell_cursor()">カーソル</li>
-           <li onclick="sell_grandma()">グランマ</li>
+           <li onclick="cursor.sell()">カーソル</li>
+           <li onclick="grandma.sell()">グランマ</li>
            <li onclick="sell_farm()">ファーム</li>
            <li onclick="sell_mine()">マイン</li>
            <li onclick="sell_factry()">ファクトリー</li>
