@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style media="screen">
+      table,tr,td,th{border: 1px solid black;}
+    </style>
   </head>
   <body>
-    
+
     <table>
       <tr id="date">
       </tr>
@@ -25,8 +28,15 @@
 
     weather_array = ["晴","晴","晴","晴","晴","晴","晴"];
 
-    let tr_date = document.getElementById('date');
-    let tr_weather = document.getElementById('weather');
+    function createWeatherTable(date_array, weather_array) {
+      let tr_date = document.getElementById('date');
+      let tr_weather = document.getElementById('weather');
+
+      date_array.forEach(function(date,i){
+        tr_date.innerHTML = tr_date.innerHTML + "<th>" + date + "</th>";
+        tr_weather.innerHTML = tr_weather.innerHTML + "<th>" + weather_array[i] + "</th>";
+      });
+    }
 
 
       var xhr = new XMLHttpRequest();
@@ -36,9 +46,11 @@
 
       xhr.onreadystatechange = function() {
         if(xhr.readyState === 4 && xhr.status === 200) {
-
-          let weathercode = JSON.parse(xhr.responseText)["daily"]["weathercode"][1]
-          document.write(weathercode)
+          let date_array = JSON.parse(xhr.responseText)["daily"]["time"];
+          let weather_array = JSON.parse(xhr.responseText)["daily"]["weathercode"];
+          createWeatherTable(date_array,weather_array);
+          //console.log(JSON.parse(xhr.responseText)["daily"]["weathercode"][1]);
+          //document.write(weathercode)
         }
       }
     </script>
