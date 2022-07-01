@@ -38,6 +38,18 @@
       });
     }
 
+    function wcodeChange(code) {
+      let w_code_list = {0:"快晴",
+                         1:"晴れ",
+                         2:"晴れ",
+                         3:"晴れ",
+                         45:"くもり",
+                         61:"雨",
+                         80:"豪雨",
+                         95:"雷雨"}
+      return w_code_list[parseInt(code)]
+    }
+
 
       var xhr = new XMLHttpRequest();
 
@@ -48,6 +60,9 @@
         if(xhr.readyState === 4 && xhr.status === 200) {
           let date_array = JSON.parse(xhr.responseText)["daily"]["time"];
           let weather_array = JSON.parse(xhr.responseText)["daily"]["weathercode"];
+
+          weather_array = weather_array.map(n => wcodeChange(n));
+
           createWeatherTable(date_array,weather_array);
           //console.log(JSON.parse(xhr.responseText)["daily"]["weathercode"][1]);
           //document.write(weathercode)
