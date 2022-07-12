@@ -92,5 +92,50 @@
         </div>
       </div>
     </div>
+
+    <script type="text/javascript">
+      let timeline = document.getElementById('timeline')
+      let array = [{username:"issei", date:"2022/7/12", text:"こんにちは", fav_count:7},
+                   {username:"issei", date:"2022/7/12", text:"こんにちは", fav_count:4},
+                   {username:"issei", date:"2022/7/12", text:"こんにちは", fav_count:1},
+                   {username:"issei", date:"2022/7/12", text:"こんにちは", fav_count:5},
+                   {username:"issei", date:"2022/7/12", text:"こんにちは", fav_count:7},
+                   {username:"issei", date:"2022/7/12", text:"こんにちは", fav_count:6},
+                 ]
+
+
+      update_Tweet();
+
+      async function update_Tweet(){
+        let array = await (await fetch("http://192.168.0.90/timeline.json")).json();
+
+        array.forEach((tweet) =>{
+
+         let template = `<div class="tweet">
+           <div class="icon">
+             <img src="stone.png" alt="">
+           </div>
+           <div class="tweet_box">
+             <div class="username">
+               いっせい
+               <span class="name">@${tweet.username}</span>
+               <span class="date">${tweet.date}</span>
+             </div>
+             <div class="text">
+               ${tweet.text}
+             </div>
+             <div class="action">
+               <span class="icon_chat">0</span>
+               <span class="icon_res">0</span>
+               <span class="icon_fav">${tweet.fav_count}</span>
+               <span class="icon_share">0</span>
+             </div>
+           </div>
+         </div>`
+         timeline.innerHTML = timeline.innerHTML + template
+       });
+      }
+
+    </script>
   </body>
 </html>
