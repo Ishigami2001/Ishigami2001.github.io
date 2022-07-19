@@ -112,8 +112,12 @@
       update_Tweet();
 
       async function update_Tweet(){
-        let array = await (await fetch("http://192.168.0.90/timeline.json")).json();
+        let array = await (await fetch("http://192.168.0.90/timeline.json?")).json();
 
+        let tweets = document.getElementsByClassName("tweet");
+        while(tweets.length>1){
+          tweets.item(1).remove()
+        }
         array.forEach((tweet) =>{
 
          let template = `<div class="tweet">
@@ -139,6 +143,7 @@
          </div>`
          timeline.innerHTML = timeline.innerHTML + template
        });
+         setTimeout(update_Tweet,5000);
       }
 
     </script>
