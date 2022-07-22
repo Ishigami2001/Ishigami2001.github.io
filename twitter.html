@@ -62,6 +62,20 @@
         background-size: contain;
         background-repeat: no-repeat;
       }
+      .tw_button {
+        display: inline;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        background-color: rgb(29, 155, 240);
+        color: #fff;
+        font-weight: bold;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
     </style>
     <meta charset="utf-8">
     <title></title>
@@ -71,7 +85,7 @@
       <div id="timeline">
         <div class="tweet">
           <input type="text" id ="input_text" placeholder="ここに入力してね!">
-          <button onclick="form_tweet()"type="submit">送信</button>
+          <button class= "tw_button" onclick="form_tweet()"type="submit">送信</button>
 
         </div>
       </div>
@@ -112,12 +126,15 @@
       update_Tweet();
 
       async function update_Tweet(){
-        let array = await (await fetch("http://192.168.0.90/timeline.json?")).json();
+        let array = await (await fetch("http://192.168.0.90/timeline.json?"　+ Date.now() )).json();
 
         let tweets = document.getElementsByClassName("tweet");
         while(tweets.length>1){
           tweets.item(1).remove()
         }
+
+        let temp_tweet = "";
+
         array.forEach((tweet) =>{
 
          let template = `<div class="tweet">
@@ -141,8 +158,11 @@
              </div>
            </div>
          </div>`
-         timeline.innerHTML = timeline.innerHTML + template
+         temp_tweet += template
        });
+        let tweet_div = document.createElement("div");
+        tweet_div.innerHTML = temp_tweet;
+        timeline.appendChild(tweet_div);
          setTimeout(update_Tweet,5000);
       }
 
